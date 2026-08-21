@@ -1,0 +1,1489 @@
+:root {
+  --tg: https://t.me/KDava;
+  --bg: #0A0A0F;
+  --text: #F5F5F7;
+  --violet: #7C3AED;
+  --violet-bright: #A855F7;
+  --violet-soft: #C4B5FD;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #0A0A0F;
+}
+
+body {
+  margin: 0;
+  background: #0A0A0F;
+  color: #F5F5F7;
+  font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: #C4B5FD;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #DDD6FE;
+}
+
+::selection {
+  background: rgba(124, 58, 237, 0.45);
+}
+
+:focus-visible {
+  outline: 2px solid #A855F7;
+  outline-offset: 3px;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Animations */
+@keyframes orbFloat {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -40px, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes orbFloat2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.04);
+  }
+  50% {
+    transform: translate3d(30px, 30px, 0) scale(0.96);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.04);
+  }
+}
+
+/* Page & Background */
+.page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #0A0A0F;
+  overflow: hidden;
+}
+
+.bg-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.orb-1 {
+  top: -280px;
+  left: 50%;
+  margin-left: -520px;
+  width: 1040px;
+  height: 780px;
+  background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.55), rgba(124, 58, 237, 0.16) 45%, rgba(10, 10, 15, 0) 70%);
+  filter: blur(70px);
+  animation: orbFloat 18s ease-in-out infinite;
+}
+
+.orb-2 {
+  top: 420px;
+  right: -220px;
+  width: 640px;
+  height: 640px;
+  background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.34), rgba(10, 10, 15, 0) 68%);
+  filter: blur(90px);
+  animation: orbFloat2 24s ease-in-out infinite;
+}
+
+.orb-3 {
+  top: 1560px;
+  left: -240px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.26), rgba(10, 10, 15, 0) 70%);
+  filter: blur(100px);
+  animation: orbFloat 26s ease-in-out infinite;
+}
+
+.grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 96px 96px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 55% at 50% 12%, #000 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 55% at 50% 12%, #000 0%, transparent 75%);
+}
+
+/* Navigation */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  padding: 18px 20px 0;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  max-width: 1080px;
+  padding: 10px 12px 10px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 999px;
+  background: rgba(18, 18, 26, 0.62);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #F5F5F7;
+}
+
+.logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: linear-gradient(150deg, #7C3AED, #A855F7);
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.6);
+}
+
+.brand-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 14px;
+  color: rgba(245, 245, 247, 0.6);
+}
+
+.nav-links a {
+  color: inherit;
+}
+
+.nav-links a:hover {
+  color: #F5F5F7;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Language Switcher */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  font-size: 13px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: rgba(245, 245, 247, 0.5);
+  cursor: pointer;
+  padding: 3px 7px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.lang-btn:hover {
+  color: #F5F5F7;
+}
+
+.lang-btn.active {
+  color: #FFFFFF;
+  background: linear-gradient(140deg, #8B5CF6, #7C3AED);
+  box-shadow: 0 0 12px rgba(124, 58, 237, 0.5);
+}
+
+.lang-divider {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 12px;
+  user-select: none;
+}
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(168, 85, 247, 0.55);
+  background: rgba(124, 58, 237, 0.16);
+  color: #EDE9FE;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 200ms ease, box-shadow 200ms ease;
+}
+
+.nav-cta:hover {
+  background: rgba(124, 58, 237, 0.34);
+  box-shadow: 0 0 24px rgba(124, 58, 237, 0.5);
+  color: #EDE9FE;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 80px 24px 100px;
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  z-index: 5;
+}
+
+.hero-phone-side {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 14px 7px 10px;
+  margin-bottom: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  color: rgba(245, 245, 247, 0.72);
+}
+
+.badge .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #A855F7;
+  box-shadow: 0 0 10px 2px rgba(168, 85, 247, 0.9);
+}
+
+.hero h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(48px, 6vw, 92px);
+  line-height: 0.95;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  background: linear-gradient(180deg, #FFFFFF 8%, #CFCBE0 62%, rgba(196, 181, 253, 0.72) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 90px rgba(124, 58, 237, 0.35);
+}
+
+.hero-sub {
+  margin-top: 18px;
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(18px, 2.8vw, 26px);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #A855F7, #C4B5FD 55%, #7C3AED);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+  margin-top: 24px;
+  max-width: 520px;
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 300;
+  color: rgba(245, 245, 247, 0.6);
+  text-wrap: pretty;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 14px;
+  margin-top: 36px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 17px 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(196, 181, 253, 0.5);
+  background: linear-gradient(160deg, #8B5CF6, #7C3AED 55%, #6D28D9);
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.35), 0 18px 50px rgba(124, 58, 237, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  color: #FFFFFF;
+  box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.5), 0 26px 70px rgba(139, 92, 246, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.34);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 17px 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  color: rgba(245, 245, 247, 0.82);
+  font-size: 16px;
+  font-weight: 400;
+  transition: background 200ms ease, border-color 200ms ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(196, 181, 253, 0.35);
+  color: rgba(245, 245, 247, 0.82);
+}
+
+.trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px 28px;
+  margin-top: 56px;
+  font-size: 13px;
+  color: rgba(245, 245, 247, 0.42);
+}
+
+.trust > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+}
+
+.trust i {
+  font-size: 16px;
+  color: #A855F7;
+  flex-shrink: 0;
+}
+
+/* Sections General */
+.section {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.kicker {
+  margin-bottom: 14px;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(168, 85, 247, 0.9);
+}
+
+.section-title {
+  font-family: 'Sora', sans-serif;
+  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  color: #F5F5F7;
+}
+
+.section-lead {
+  max-width: 480px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(245, 245, 247, 0.55);
+}
+
+/* Services Section */
+#services {
+  padding: 40px 24px 120px;
+}
+
+#services .section-title {
+  max-width: 640px;
+  margin-bottom: 18px;
+  font-size: clamp(32px, 4.6vw, 52px);
+}
+
+#services .section-lead {
+  margin-bottom: 56px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  position: relative;
+  padding: 34px 30px 36px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 26px;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018));
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 24px 60px rgba(0, 0, 0, 0.45);
+  transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(168, 85, 247, 0.45);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 30px 80px rgba(124, 58, 237, 0.35), 0 0 0 1px rgba(168, 85, 247, 0.25);
+}
+
+.card-icon {
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 26px;
+  border-radius: 15px;
+  border: 1px solid rgba(196, 181, 253, 0.28);
+  background: radial-gradient(circle at 30% 20%, rgba(168, 85, 247, 0.42), rgba(124, 58, 237, 0.12));
+  box-shadow: 0 0 26px rgba(124, 58, 237, 0.45);
+}
+
+.card-icon i {
+  font-size: 24px;
+  color: #EDE9FE;
+}
+
+.card h3 {
+  margin-bottom: 12px;
+  font-family: 'Sora', sans-serif;
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #F5F5F7;
+}
+
+.card p {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(245, 245, 247, 0.58);
+  text-wrap: pretty;
+}
+
+/* How It Works Section */
+#how {
+  padding: 20px 24px 130px;
+}
+
+.how-panel {
+  padding: 56px 40px 52px;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 34px;
+  background: linear-gradient(150deg, rgba(124, 58, 237, 0.14), rgba(255, 255, 255, 0.02) 45%, rgba(255, 255, 255, 0.012));
+  backdrop-filter: blur(26px);
+  -webkit-backdrop-filter: blur(26px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.how-panel .section-title {
+  max-width: 560px;
+  margin-bottom: 52px;
+  font-size: clamp(30px, 4.2vw, 46px);
+  line-height: 1.08;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 32px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.step-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: rgba(168, 85, 247, 0.95);
+}
+
+.step-rule {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(168, 85, 247, 0.7), rgba(168, 85, 247, 0));
+}
+
+.step h3 {
+  margin-top: 6px;
+  font-family: 'Sora', sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: #F5F5F7;
+}
+
+.step p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(245, 245, 247, 0.52);
+}
+
+/* FAQ Section */
+#faq {
+  padding: 0 24px 130px;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 48px;
+  align-items: start;
+}
+
+.faq-intro .section-title {
+  margin-bottom: 18px;
+  font-size: clamp(30px, 4.4vw, 48px);
+}
+
+.faq-intro p {
+  max-width: 340px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(245, 245, 247, 0.5);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 22px 24px;
+  border: 0;
+  background: transparent;
+  color: #F5F5F7;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-q:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.faq-q .plus {
+  flex: 0 0 auto;
+  font-size: 20px;
+  line-height: 1;
+  color: #A855F7;
+  transition: transform 260ms ease;
+}
+
+.faq-item.open .faq-q .plus {
+  transform: rotate(45deg);
+}
+
+.faq-a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms ease;
+}
+
+.faq-item.open .faq-a {
+  grid-template-rows: 1fr;
+}
+
+.faq-a > div {
+  overflow: hidden;
+}
+
+.faq-a p {
+  padding: 0 24px 24px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(245, 245, 247, 0.58);
+}
+
+/* Call to Action Section */
+#cta {
+  padding: 0 24px 120px;
+}
+
+.cta-panel {
+  position: relative;
+  overflow: hidden;
+  padding: 84px 40px 90px;
+  border: 1px solid rgba(196, 181, 253, 0.22);
+  border-radius: 36px;
+  background: linear-gradient(160deg, rgba(124, 58, 237, 0.3), rgba(124, 58, 237, 0.08) 48%, rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 40px 100px rgba(124, 58, 237, 0.28);
+  text-align: center;
+}
+
+.cta-glow {
+  position: absolute;
+  top: -180px;
+  left: 50%;
+  margin-left: -300px;
+  width: 600px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.55), rgba(10, 10, 15, 0) 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.cta-panel h2 {
+  position: relative;
+  margin: 0 auto 20px;
+  max-width: 720px;
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(32px, 5vw, 58px);
+  line-height: 1.04;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+}
+
+.cta-panel .cta-lead {
+  position: relative;
+  margin: 0 auto 44px;
+  max-width: 460px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(245, 245, 247, 0.66);
+}
+
+.btn-white {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: #FFFFFF;
+  color: #14101F;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  box-shadow: 0 18px 50px rgba(168, 85, 247, 0.5);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.btn-white:hover {
+  transform: translateY(-2px);
+  color: #14101F;
+  box-shadow: 0 26px 70px rgba(196, 181, 253, 0.6);
+}
+
+.cta-handle {
+  position: relative;
+  margin-top: 22px;
+  font-size: 14px;
+  color: rgba(245, 245, 247, 0.5);
+}
+
+/* Footer */
+footer {
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 36px 24px 48px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #F5F5F7;
+  text-decoration: none;
+}
+
+.footer-brand .logo-img {
+  width: 28px;
+  height: 28px;
+}
+
+.footer-brand span:last-child {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(245, 245, 247, 0.8);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  font-size: 14px;
+  color: rgba(245, 245, 247, 0.45);
+}
+
+.footer-links a {
+  color: inherit;
+}
+
+.footer-links a:hover {
+  color: #F5F5F7;
+}
+
+.copyright {
+  font-size: 13px;
+  color: rgba(245, 245, 247, 0.3);
+}
+
+/* 3D Phone Showcase Section in Hero */
+.hero-phone-side {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+  width: 100%;
+}
+
+.phone-showcase-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  perspective: 1200px;
+  overflow: visible;
+}
+
+.phone-3d-scene {
+  position: relative;
+  width: 320px;
+  height: 650px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+}
+
+/* 3D Floor Shadow & Glow */
+.phone-3d-shadow {
+  position: absolute;
+  bottom: -40px;
+  width: 280px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  filter: blur(25px);
+  transform: rotateX(75deg) translateZ(-80px);
+  animation: shadowScale 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.phone-3d-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 420px;
+  height: 620px;
+  margin-top: -310px;
+  margin-left: -210px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.45), rgba(124, 58, 237, 0.12) 50%, rgba(10, 10, 15, 0) 75%);
+  filter: blur(60px);
+  pointer-events: none;
+  transform: translateZ(-100px);
+}
+
+/* The 3D Device Container */
+.phone-3d-device {
+  position: relative;
+  width: 310px;
+  height: 630px;
+  transform-style: preserve-3d;
+  transform: rotateX(12deg) rotateY(-18deg) rotateZ(4deg);
+  transition: transform 0.2s ease-out;
+  animation: phoneFloatSubtle 8s ease-in-out infinite;
+}
+
+/* 3D Hardware Extrusions and Titanium Body */
+.iphone-hardware {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+/* Physical Hardware Side Buttons */
+.iphone-btn {
+  position: absolute;
+  background: linear-gradient(180deg, #443c5e, #292439, #1c1828);
+  border-radius: 3px;
+  box-shadow: -2px 0 4px rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.iphone-btn-volume-up {
+  top: 115px;
+  left: -4px;
+  width: 4px;
+  height: 48px;
+}
+
+.iphone-btn-volume-down {
+  top: 175px;
+  left: -4px;
+  width: 4px;
+  height: 48px;
+}
+
+.iphone-btn-power {
+  top: 140px;
+  right: -4px;
+  width: 4px;
+  height: 68px;
+}
+
+/* 3D Extruded Body Layer (Side thickness) */
+.iphone-body-depth {
+  position: absolute;
+  inset: -1px;
+  border-radius: 52px;
+  background: linear-gradient(135deg, #3d3556 0%, #201c2e 50%, #110e19 100%);
+  transform: translateZ(-12px);
+  box-shadow:
+    -1px 1px 0px #3c3453,
+    -2px 2px 0px #342c48,
+    -3px 3px 0px #2c253d,
+    -4px 4px 0px #241e33,
+    -5px 5px 0px #1d1829,
+    -6px 6px 0px #161220,
+    -7px 7px 0px #100d17,
+    -8px 8px 0px #0a080f,
+    -20px 32px 70px rgba(0, 0, 0, 0.9),
+    0 0 50px rgba(168, 85, 247, 0.28);
+}
+
+/* iPhone Body Front Face */
+.iphone-body-front {
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: linear-gradient(145deg, #302a42, #1b1727 60%, #120f1b);
+  padding: 3px;
+  transform-style: preserve-3d;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.15), 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+/* Realistic Rounded OLED Bezel */
+.iphone-bezel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 47px;
+  background: #000;
+  padding: 8px;
+  box-shadow: inset 0 0 0 2px #0f0c18;
+}
+
+/* Screen Wrapper */
+.iphone-screen-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 40px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.95);
+  transform-style: preserve-3d;
+}
+
+/* Dynamic Island (notch) - sleek, rounded & well proportioned */
+.iphone-island {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72px;
+  height: 20px;
+  background: #000;
+  border-radius: 14px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 7px;
+  gap: 5px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.95);
+}
+
+.iphone-island .camera {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #111;
+  box-shadow: inset 0 0 2px #000, 0 0 1px #222;
+}
+
+.iphone-island .sensor {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #0a0812;
+}
+
+/* High Quality Video in Screen */
+.iphone-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 40px;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  filter: contrast(1.04) brightness(1.02) saturate(1.03);
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Screen Vignette for Curved Display Realism */
+.iphone-screen-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 40px;
+  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.6), inset 0 0 2px rgba(255, 255, 255, 0.1);
+  z-index: 20;
+}
+
+/* Glass Glare & Light Beam Specular Highlight */
+.iphone-glass-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.1) 22%,
+    rgba(255, 255, 255, 0) 45%,
+    rgba(255, 255, 255, 0.02) 72%,
+    rgba(255, 255, 255, 0.14) 100%
+  );
+  border-radius: 40px;
+  z-index: 22;
+}
+
+/* Subtle Floating Animations (Gentle amplitude: translateY -7px) */
+@keyframes phoneFloatSubtle {
+  0% {
+    transform: rotateX(12deg) rotateY(-18deg) rotateZ(4deg) translateY(0px);
+  }
+  50% {
+    transform: rotateX(14deg) rotateY(-15deg) rotateZ(3deg) translateY(-7px);
+  }
+  100% {
+    transform: rotateX(12deg) rotateY(-18deg) rotateZ(4deg) translateY(0px);
+  }
+}
+
+@keyframes shadowScale {
+  0% {
+    transform: rotateX(75deg) translateZ(-80px) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: rotateX(75deg) translateZ(-80px) scale(0.92);
+    opacity: 0.55;
+  }
+  100% {
+    transform: rotateX(75deg) translateZ(-80px) scale(1);
+    opacity: 0.7;
+  }
+}
+
+/* ==========================================================================
+   BACKGROUND 3D TELEGRAM GIFT ELEMENTS (Uniform Size, Strictly Behind Content)
+   ========================================================================== */
+
+.bg-gift {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  user-select: none;
+  width: 340px;
+  height: 340px;
+  object-fit: contain;
+  opacity: 0.50;
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 45px rgba(168, 85, 247, 0.45));
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* 4 Gift Objects placed over background Orbs (Exact same 220px x 220px size) */
+
+/* Gift 1: Over Orb 1 (Top Hero background glow) */
+.bg-gift-1 {
+  top: 100px;
+  left: 4%;
+  animation: giftBgFloat1 8.5s ease-in-out infinite;
+}
+
+/* Gift 2: Over Orb 2 (Right side background glow near Services) */
+.bg-gift-2 {
+  top: 680px;
+  right: 3%;
+  animation: giftBgFloat2 9.5s ease-in-out infinite 1s;
+}
+
+/* Gift 3: Over Orb 3 (Left side background glow near How section) */
+.bg-gift-3 {
+  top: 1480px;
+  left: 3%;
+  animation: giftBgFloat3 10s ease-in-out infinite 0.5s;
+}
+
+/* Gift 4: Over CTA background glow (Bottom CTA area) */
+.bg-gift-4 {
+  bottom: 120px;
+  right: 4%;
+  animation: giftBgFloat4 8.8s ease-in-out infinite 1.5s;
+}
+
+/* Keyframes for Deep Background Levitation & 3D Tilt */
+@keyframes giftBgFloat1 {
+  0% {
+    transform: translateY(0px) rotate3d(1, 0.8, 0, 14deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate3d(1, 0.8, 0, 24deg) scale(1.04);
+  }
+  100% {
+    transform: translateY(0px) rotate3d(1, 0.8, 0, 14deg);
+  }
+}
+
+@keyframes giftBgFloat2 {
+  0% {
+    transform: translateY(0px) rotate3d(-1, 1, 0.5, -16deg);
+  }
+  50% {
+    transform: translateY(-24px) rotate3d(-1, 1, 0.5, -8deg) scale(1.05);
+  }
+  100% {
+    transform: translateY(0px) rotate3d(-1, 1, 0.5, -16deg);
+  }
+}
+
+@keyframes giftBgFloat3 {
+  0% {
+    transform: translateY(0px) rotate3d(0.5, -1, 0.8, 16deg);
+  }
+  50% {
+    transform: translateY(-22px) rotate3d(0.5, -1, 0.8, 26deg) scale(1.04);
+  }
+  100% {
+    transform: translateY(0px) rotate3d(0.5, -1, 0.8, 16deg);
+  }
+}
+
+@keyframes giftBgFloat4 {
+  0% {
+    transform: translateY(0px) rotate3d(-0.8, -0.6, 1, -12deg);
+  }
+  50% {
+    transform: translateY(-26px) rotate3d(-0.8, -0.6, 1, -22deg) scale(1.05);
+  }
+  100% {
+    transform: translateY(0px) rotate3d(-0.8, -0.6, 1, -12deg);
+  }
+}
+
+/* ==========================================================================
+   FULL RESPONSIVE MEDIA QUERIES (Tablets & Mobile)
+   ========================================================================== */
+
+/* Tablets & Small Laptops (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .hero {
+    padding: 60px 24px 80px;
+  }
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+  .hero-content {
+    align-items: center;
+    text-align: center;
+  }
+  .hero-actions,
+  .trust {
+    justify-content: center;
+  }
+  .hero-desc {
+    max-width: 580px;
+  }
+}
+
+/* Medium Tablets & Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Mobile Background 3D Gifts (Large 220px size, soft 0.35 opacity for clear text contrast) */
+  .bg-gift {
+    width: 220px;
+    height: 220px;
+    opacity: 0.35;
+  }
+  .bg-gift-1 {
+    top: 60px;
+    left: 2%;
+  }
+  .bg-gift-2 {
+    top: 720px;
+    right: 2%;
+  }
+  .bg-gift-3 {
+    top: 1540px;
+    left: 2%;
+  }
+  .bg-gift-4 {
+    bottom: 80px;
+    right: 2%;
+  }
+
+  .nav {
+    padding: 12px 14px 0;
+  }
+  .nav-inner {
+    padding: 8px 12px 8px 16px;
+    gap: 12px;
+  }
+  .nav-links {
+    display: none;
+  }
+  .brand-name {
+    font-size: 14px;
+  }
+  .brand-mark {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+  }
+  .logo-img {
+    width: 26px;
+    height: 26px;
+  }
+  .lang-switcher {
+    padding: 3px 6px;
+  }
+  .lang-btn {
+    padding: 2px 5px;
+    font-size: 11px;
+  }
+  .nav-cta {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .hero {
+    padding: 48px 16px 60px;
+  }
+  .hero h1 {
+    font-size: clamp(38px, 9vw, 64px);
+  }
+  .hero-sub {
+    font-size: clamp(16px, 4vw, 22px);
+  }
+  .hero-desc {
+    font-size: 15px;
+  }
+  .trust {
+    margin-top: 40px;
+    gap: 12px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .trust > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: auto;
+  }
+
+  /* Services */
+  #services {
+    padding: 30px 16px 80px;
+  }
+  #services .section-title {
+    font-size: clamp(26px, 6vw, 38px);
+  }
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .card {
+    padding: 26px 22px 28px;
+    border-radius: 20px;
+  }
+
+  /* How It Works */
+  #how {
+    padding: 10px 16px 90px;
+  }
+  .how-panel {
+    padding: 36px 20px 36px;
+    border-radius: 24px;
+  }
+  .how-panel .section-title {
+    font-size: clamp(24px, 5.5vw, 36px);
+    margin-bottom: 36px;
+  }
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* FAQ */
+  #faq {
+    padding: 0 16px 90px;
+  }
+  .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .faq-intro {
+    text-align: center;
+  }
+  .faq-intro p {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .faq-intro .section-title {
+    font-size: clamp(26px, 6vw, 38px);
+  }
+  .faq-q {
+    padding: 18px 20px;
+    font-size: 15px;
+  }
+
+  /* CTA */
+  #cta {
+    padding: 0 16px 80px;
+  }
+  .cta-panel {
+    padding: 52px 20px 56px;
+    border-radius: 28px;
+  }
+  .cta-panel h2 {
+    font-size: clamp(24px, 6vw, 42px);
+  }
+  .cta-panel .cta-lead {
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+
+  /* Footer */
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding: 32px 16px 40px;
+  }
+  .footer-links {
+    justify-content: center;
+    gap: 18px;
+  }
+
+  /* 3D Phone Mockup Mobile Scaler */
+  .phone-showcase-section {
+    padding: 0;
+  }
+  .phone-3d-scene {
+    width: 260px;
+    height: 520px;
+  }
+  .phone-3d-device {
+    width: 250px;
+    height: 500px;
+    transform: rotateX(10deg) rotateY(-14deg) rotateZ(3deg);
+  }
+  .iphone-body-front {
+    border-radius: 42px;
+    padding: 2.5px;
+  }
+  .iphone-bezel {
+    border-radius: 39px;
+    padding: 6px;
+  }
+  .iphone-screen-wrapper {
+    border-radius: 33px;
+  }
+  .iphone-video {
+    border-radius: 33px;
+  }
+  .iphone-glass-glare,
+  .iphone-screen-vignette {
+    border-radius: 33px;
+  }
+  .iphone-island {
+    width: 58px;
+    height: 16px;
+    top: 6px;
+  }
+  .iphone-island .camera {
+    width: 6px;
+    height: 6px;
+  }
+  .iphone-island .sensor {
+    width: 4px;
+    height: 4px;
+  }
+}
+
+/* Extra Small Phones (max-width: 480px) */
+@media (max-width: 480px) {
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn-primary,
+  .btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+  .trust > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: auto;
+  }
+  .phone-3d-scene {
+    width: 220px;
+    height: 450px;
+  }
+  .phone-3d-device {
+    width: 210px;
+    height: 430px;
+  }
+  .iphone-island {
+    width: 48px;
+    height: 13px;
+    top: 4px;
+  }
+}
