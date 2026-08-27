@@ -93,7 +93,6 @@
                         </div>
                         <video class="iphone-video" autoplay loop muted playsinline preload="auto">
                           <source src="image/video_2026-08-21_19-53-35.mp4" type="video/mp4">
-                          <source src="image/doc_2026-08-21_19-42-29.mp4" type="video/mp4">
                         </video>
                         <div class="iphone-glass-glare"></div>
                         <div class="iphone-screen-vignette"></div>
@@ -226,25 +225,55 @@
   </div>
 
   <script>
+    // Runs an init step in isolation: a failure in one feature is reported but
+    // never prevents the remaining features from initialising.
+    function initFeature(name, fn) {
+      try {
+        fn();
+      } catch (err) {
+        console.error('[DavaModern] failed to initialise "' + name + '":', err);
+      }
+    }
+
     // FAQ accordion
-    document.querySelectorAll('.faq-item').forEach(function (item) {
-      item.querySelector('.faq-q').addEventListener('click', function () {
-        var wasOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(function (i) { i.classList.remove('open'); });
-        if (!wasOpen) item.classList.add('open');
+    initFeature('faq-accordion', function () {
+      var items = document.querySelectorAll('.faq-item');
+      if (!items.length) {
+        console.warn('[DavaModern] no .faq-item elements found, accordion inactive');
+        return;
+      }
+      items.forEach(function (item) {
+        var question = item.querySelector('.faq-q');
+        if (!question) {
+          console.warn('[DavaModern] .faq-item without a .faq-q trigger, skipping:', item);
+          return;
+        }
+        question.addEventListener('click', function () {
+          var wasOpen = item.classList.contains('open');
+          items.forEach(function (i) { i.classList.remove('open'); });
+          if (!wasOpen) item.classList.add('open');
+        });
       });
     });
 
     // Central Telegram handle — change once here
     var TG_HANDLE = 'KDava';
-    var tgUrl = 'https://t.me/' + TG_HANDLE;
-    document.querySelectorAll('.js-tg').forEach(function (a) { a.href = tgUrl; });
-    document.querySelectorAll('.cta-handle').forEach(function (el) { el.textContent = '@' + TG_HANDLE; });
+    initFeature('telegram-links', function () {
+      var tgUrl = 'https://t.me/' + TG_HANDLE;
+      var links = document.querySelectorAll('.js-tg');
+      if (!links.length) console.warn('[DavaModern] no .js-tg links found to point at ' + tgUrl);
+      links.forEach(function (a) { a.href = tgUrl; });
+      document.querySelectorAll('.cta-handle').forEach(function (el) { el.textContent = '@' + TG_HANDLE; });
+    });
 
     // Interactive 3D Parallax Tilt for Phone Showcase
-    var phoneScene = document.querySelector('.hero');
-    var phoneDevice = document.querySelector('.phone-3d-device');
-    if (phoneScene && phoneDevice) {
+    initFeature('phone-tilt', function () {
+      var phoneScene = document.querySelector('.hero');
+      var phoneDevice = document.querySelector('.phone-3d-device');
+      if (!phoneScene || !phoneDevice) {
+        console.warn('[DavaModern] phone tilt disabled, missing ' + (phoneScene ? '.phone-3d-device' : '.hero'));
+        return;
+      }
       phoneScene.addEventListener('mousemove', function(e) {
         var rect = phoneScene.getBoundingClientRect();
         var x = e.clientX - rect.left - rect.width / 2;
@@ -256,7 +285,28 @@
       phoneScene.addEventListener('mouseleave', function() {
         phoneDevice.style.transform = '';
       });
-    }
+    });
+
+    // Media assets: report failed downloads instead of leaving silent gaps
+    initFeature('media-error-reporting', function () {
+      document.querySelectorAll('img').forEach(function (img) {
+        img.addEventListener('error', function () {
+          console.error('[DavaModern] image failed to load: ' + (img.currentSrc || img.src));
+        });
+        // Images that already failed before this script ran fire no event.
+        if (img.complete && img.naturalWidth === 0) {
+          console.error('[DavaModern] image failed to load: ' + (img.currentSrc || img.src));
+        }
+      });
+      document.querySelectorAll('video').forEach(function (video) {
+        // Capture phase so per-<source> errors are seen too, they do not bubble.
+        video.addEventListener('error', function (e) {
+          var target = e.target;
+          console.error('[DavaModern] video source failed to load: ' +
+            (target && target.src ? target.src : video.currentSrc || '(no playable source)'));
+        }, true);
+      });
+    });
 
     // Multilingual i18n Translation Logic
     var translations = {
@@ -370,8 +420,13 @@
       }
     };
 
+    var DEFAULT_LANG = 'ru';
+
     function setLanguage(lang) {
-      if (!translations[lang]) lang = 'ru';
+      if (!translations[lang]) {
+        console.warn('[DavaModern] unknown language "' + lang + '", falling back to "' + DEFAULT_LANG + '"');
+        lang = DEFAULT_LANG;
+      }
       document.documentElement.lang = lang;
 
       // Update active state on language switcher buttons
@@ -384,38 +439,56 @@
       });
 
       // Translate all data-i18n elements
+      var missing = [];
       document.querySelectorAll('[data-i18n]').forEach(function(el) {
         var key = el.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-          var val = translations[lang][key];
-          if (val.indexOf('<') !== -1) {
-            el.innerHTML = val;
-          } else {
-            el.textContent = val;
-          }
+        var val = translations[lang][key];
+        if (typeof val !== 'string') {
+          missing.push(key);
+          return;
+        }
+        if (val.indexOf('<') !== -1) {
+          el.innerHTML = val;
+        } else {
+          el.textContent = val;
         }
       });
+      if (missing.length) {
+        console.error('[DavaModern] missing "' + lang + '" translations, original text kept for: ' + missing.join(', '));
+      }
 
       // Save preference to localStorage
       try {
         localStorage.setItem('davamodern_lang', lang);
-      } catch (e) {}
+      } catch (err) {
+        console.warn('[DavaModern] could not persist language preference:', err);
+      }
     }
 
     // Attach click listeners to language buttons
-    document.querySelectorAll('.lang-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var lang = this.getAttribute('data-lang');
-        setLanguage(lang);
+    initFeature('language-switcher', function () {
+      var buttons = document.querySelectorAll('.lang-btn');
+      if (!buttons.length) console.warn('[DavaModern] no .lang-btn elements found, language switcher inactive');
+      buttons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var lang = this.getAttribute('data-lang');
+          if (!lang) {
+            console.error('[DavaModern] .lang-btn is missing its data-lang attribute:', this);
+            return;
+          }
+          setLanguage(lang);
+        });
       });
-    });
 
-    // Initialize language preference from localStorage or default 'ru'
-    var savedLang = 'ru';
-    try {
-      savedLang = localStorage.getItem('davamodern_lang') || 'ru';
-    } catch(e) {}
-    setLanguage(savedLang);
+      // Initialize language preference from localStorage or default
+      var savedLang = DEFAULT_LANG;
+      try {
+        savedLang = localStorage.getItem('davamodern_lang') || DEFAULT_LANG;
+      } catch (err) {
+        console.warn('[DavaModern] could not read stored language preference:', err);
+      }
+      setLanguage(savedLang);
+    });
   </script>
 </body>
 </html>
